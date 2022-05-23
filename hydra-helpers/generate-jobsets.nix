@@ -1,4 +1,4 @@
-{ owner, repo, prs, refs, ... }:
-(builtins.getFlake "github:project-everest/everest-nix?dir=hydra-helpers").lib.${builtins.currentSystem}.makeGitHubJobsets
+{ owner, repo, prs, refs, everest-nix, ... }:
+(import (everest-nix + "/hydra-helpers/default.nix")).lib.${builtins.currentSystem}.makeGitHubJobsets
   {inherit owner repo;}
   {inherit prs refs;}

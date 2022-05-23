@@ -24,8 +24,6 @@ rec {
   mapFilter = f: l: builtins.filter (x: !(isNull x)) (map f l);
   mapFilterAttrs = f: attrs: builtins.listToAttrs (mapFilter ({name, value}: f name value) (attrsToList attrs));
   default-blacklist = lines (builtins.readFile ./blacklist.txt);
-  # oneliner to generate blacklist, supposing you're in a folder whose subfolder are repos of project everest:
-  # for i in */; do ( cd "$i"; for rev in $(git branch --list -r); do git cat-file -e "${rev}:flake.nix" 2>/dev/null || git rev-parse "$rev"; done ) ; done | grep -Po "^.{14}" | sort -u > blacklist
   makeGitHubJobsets' = {repo, owner, blacklist ? default-blacklist, dir ? null }:
     let
       blacklisted = sha: pkgs.lib.any (flip hasPrefix sha) blacklist;

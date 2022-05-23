@@ -1,0 +1,32 @@
+diff --git a/src/hydra-eval-jobs/hydra-eval-jobs.cc b/src/hydra-eval-jobs/hydra-eval-jobs.cc
+index 918bd451..2484f76f 100644
+--- a/src/hydra-eval-jobs/hydra-eval-jobs.cc
++++ b/src/hydra-eval-jobs/hydra-eval-jobs.cc
+@@ -127,9 +127,11 @@ static void worker(
+ 
+         auto lockedFlake = lockFlake(state, flakeRef,
+             LockFlags {
+-                .updateLockFile = false,
+-                .useRegistries = false,
+-                .allowMutable = false,
++	        .updateLockFile = true ,
++		.writeLockFile  = false,
++		.useRegistries  = true,
++		.applyNixConfig = true ,
++		.allowMutable   = true ,
+             });
+ 
+         callFlake(state, lockedFlake, *vFlake);
+diff --git a/src/script/hydra-eval-jobset b/src/script/hydra-eval-jobset
+index 8804b2bb..911c3650 100755
+--- a/src/script/hydra-eval-jobset
++++ b/src/script/hydra-eval-jobset
+@@ -640,7 +640,7 @@ sub checkJobsetWrapped {
+     my $flakeRef = $jobset->flake;
+     if (defined $flakeRef) {
+         (my $res, my $json, my $stderr) = captureStdoutStderr(
+-            600, "nix", "flake", "info", "--tarball-ttl", 0, "--json", "--", $flakeRef);
++            600, "nix", "flake", "info", "--no-write-lock-file", "--tarball-ttl", 0, "--json", "--", $flakeRef);
+         die "'nix flake info' returned " . ($res & 127 ? "signal $res" : "exit code " . ($res >> 8))
+             . ":\n" . ($stderr ? decode("utf-8", $stderr) : "(no output)\n")
+             if $res;

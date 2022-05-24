@@ -6,11 +6,11 @@
       # vale-src ? null
 }:
 final: prev: {
-  fstar    = final.callPackage ./fstar/fstar.nix { src =    fstar-src; };
-  karamel  = final.callPackage ./karamel.nix     { src =  karamel-src; };
-  hacl     = final.callPackage ./hacl.nix        { src =     hacl-src; };
-  z3       = final.callPackage ./fstar/z3.nix    { z3  =     prev.z3;
-                                                 /*src =       z3-src;*/ };
-  mlcrypto = final.callPackage ./mlcrypto.nix    { /* src = mlcrypto-src; */ };
-  vale     = final.callPackage ./vale.nix        {/*src =     vale-src;*/ };
+  fstar    = final.callPackage ./fstar       { src =    fstar-src; };
+  karamel  = final.callPackage ./karamel     { src =  karamel-src; };
+  hacl     = final.callPackage ./hacl-star   { src =     hacl-src; };
+  z3       = final.callPackage ./z3          { z3  =      prev.z3;
+                                               /*src =       z3-src;*/ };
+  mlcrypto = final.callPackage ./mlcrypto    { /*src = mlcrypto-src; */ };
+  vale     = final.callPackage ./vale        { /*src =     vale-src;*/ };
 }

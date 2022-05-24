@@ -30,7 +30,7 @@
       );
     in
       {
-        nixosConfigurations.hydra = nixpkgs.lib.nixosSystem rec {
+        nixosConfigurations.everest-hydra = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           modules = let
             base = {pkgs, config, ...}: {

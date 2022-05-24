@@ -50,7 +50,8 @@ rec {
             name = "pr-${id}";
             value = makeJob 50
               "PR ${id}: ${info.title}"
-              "github:${info.head.repo.full_name}?ref=${info.head.ref}";
+              "github:${owner}/${repo}?ref=${info.head.ref}";
+              # "github:${info.head.repo.full_name}?ref=${info.head.ref}";
           };
     in
       { prs, refs, ... }: mapFilterAttrs jobOfPR  prs

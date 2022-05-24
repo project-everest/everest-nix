@@ -1,10 +1,11 @@
 { everest-nix }:
 
 let
+  system = builtins.currentSystem;
   hydra-helpers = import (everest-nix + "/hydra-helpers/default.nix");
-  pkgs = import hydra-helpers.inputs.nixpkgs { system = "x86_64-linux"; };
+  pkgs = import hydra-helpers.inputs.nixpkgs { inherit system; };
 in
-with hydra-helpers.lib;
+with hydra-helpers.lib.${system};
 
 {
   jobsets = pkgs.writeText "spec.json" (builtins.toJSON {

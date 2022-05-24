@@ -149,7 +149,7 @@ in
                        chmod 600 $HOME/.ssh/id_ed25519
                        chmod 600 $HOME/.ssh/id_ed25519.pub
 
-                       sleep 15
+                       sleep 4
                        cat "${cfg.usersFile}" <(echo) | while IFS= read -r line; do
                          [[ "$line" =~ ^[[:space:]]*$ ]] && continue
                          IFS=':' read user hash role <<< "$line"

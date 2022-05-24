@@ -1,0 +1,13 @@
+diff --git a/src/lib/Hydra/Plugin/GithubStatus.pm b/src/lib/Hydra/Plugin/GithubStatus.pm
+index fe791533..50675657 100644
+--- a/src/lib/Hydra/Plugin/GithubStatus.pm
++++ b/src/lib/Hydra/Plugin/GithubStatus.pm
+@@ -98,7 +98,7 @@ sub common {
+                     my $fl = $eval->flake;
+                     print STDERR "Flake is $fl\n";
+                     if ($eval->flake =~ m!github:([^/]+)/([^/]+)/([[:xdigit:]]{40})$! or $eval->flake =~ m!git\+ssh://git\@github.com/([^/]+)/([^/]+)\?.*rev=([[:xdigit:]]{40})$!) {
+-                        $sendStatus->("src", $1, $2, $3);
++                        $sendStatus->("src", $conf->{overrideOwner} // $1, $conf->{overrideRepo} // $2, $3);
+                     } else {
+                         print STDERR "Can't parse flake, skipping GitHub status update\n";
+                     }

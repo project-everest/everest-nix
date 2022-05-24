@@ -21,6 +21,7 @@
                 ./hydra-patches/eval-badly-locked-flakes.diff
                 ./hydra-patches/gh-webhook.diff
                 ./hydra-patches/disable-restrict-eval.diff
+                ./hydra-patches/status-override.diff
               ];
               doCheck = false;
             });
@@ -101,8 +102,16 @@
                 extraConfig = ''
                   evaluator_pure_eval = false
                   <githubstatus>
-                    jobs = nevermatchfornow.*
+                    jobs = comparse:.*
                     excludeBuildFromContext = 1
+                    useShortContext = 1
+                  </githubstatus>
+                  <githubstatus>
+                    jobs = hacl-star:.*
+                    excludeBuildFromContext = 1
+                    overrideOwner = project-everest
+                    overrideRepo = hacl-star
+                    useShortContext = 1
                   </githubstatus>
                   Include ${config.age.secrets.github-token-hydra.path}
                 '';
@@ -110,7 +119,9 @@
               services.declarative-hydra = {
                 enable = true;
                 usersFile = config.age.secrets.hydra-users.path;
-                hydraNixConf = "";
+                hydraNixConf = ''
+                  include ${config.age.secrets.github-token-nix-conf.path}
+                '';
                 sshKeys = {
                   privateKeyFile = config.age.secrets.hydra-privateKey.path;
                   publicKeyFile  = ./secrets/id_ed25519.pub;
@@ -118,9 +129,41 @@
                 projects =
                   let mkGhProject = { displayname, description, owner, repo, enabled ? 1, visible ? true }: {
                         inherit displayname description enabled visible;
-                        declarative.file = ".hydra/spec.json";
-                        declarative.type = "git";
-                        declarative.value = "https://github.com/${owner}/${repo}";
+                        declarative.file = "spec.json";
+                        declarative.type = "path";
+                        declarative.value = "${pkgs.writeTextDir "spec.json" ''
+                           { "enabled": 1,
+                             "hidden": false,
+                             "description": "Hacl* Jobsets",
+                             "nixexprinput": "everest-nix",
+                             "nixexprpath": "hydra-helpers/generate-jobsets.nix",
+                             "checkinterval": 36000000,
+                             "schedulingshares": 100,
+                             "enableemail": true, 
+                             "emailoverride": "",
+                             "keepnr": 3,
+                             "inputs": {
+                               "everest-nix": {
+                                 "type": "git",
+                                 "value": "https://github.com/project-everest/everest-nix.git master"
+                               },
+                               "src": {
+                                 "type": "git",
+                                 "value": "https://github.com/project-everest/hacl-star.git master"
+                               },
+                               "prs": {
+                                 "type": "githubpulls",
+                                 "value": "project-everest hacl-star"
+                               },
+                               "refs": {
+                                 "type": "github_refs",
+                                 "value": "project-everest hacl-star heads - "
+                               },
+                               "owner": { "type": "string", "value": "project-everest" },
+                               "repo": { "type": "string", "value": "hacl-star" }
+                             }
+                           }
+                        ''}";
                       }; in {
                         # fstar = mkGhProject {
                         #   displayname = "FStar";

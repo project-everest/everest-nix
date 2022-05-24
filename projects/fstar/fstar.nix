@@ -23,6 +23,7 @@ in bin // {
         mkdir -p "$out"/nix-support
         echo "doc manual $out/book" >> $out/nix-support/hydra-build-products
         mv _build/html $out/book
+        echo "test3" > $out/book/test-wit
       '';
     };
   };

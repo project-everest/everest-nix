@@ -134,10 +134,10 @@
                         declarative.value = "${pkgs.writeTextDir "spec.json" ''
                            { "enabled": 1,
                              "hidden": false,
-                             "description": "Hacl* Jobsets",
+                             "description": "Everest Jobsets",
                              "nixexprinput": "everest-nix",
                              "nixexprpath": "hydra-helpers/generate-jobsets.nix",
-                             "checkinterval": 36000000,
+                             "checkinterval": 3600,
                              "schedulingshares": 100,
                              "enableemail": true, 
                              "emailoverride": "",
@@ -149,39 +149,45 @@
                                },
                                "src": {
                                  "type": "git",
-                                 "value": "https://github.com/project-everest/hacl-star.git master"
+                                 "value": "https://github.com/${owner}/${repo}.git master"
                                },
                                "prs": {
                                  "type": "githubpulls",
-                                 "value": "project-everest hacl-star"
+                                 "value": "${owner} ${repo}"
                                },
                                "refs": {
                                  "type": "github_refs",
-                                 "value": "project-everest hacl-star heads - "
+                                 "value": "${owner} ${repo} heads - "
                                },
-                               "owner": { "type": "string", "value": "project-everest" },
-                               "repo": { "type": "string", "value": "hacl-star" }
+                               "owner": { "type": "string", "value": "${owner}" },
+                               "repo": { "type": "string", "value": "${repo}" }
                              }
                            }
                         ''}";
                       }; in {
                         # fstar = mkGhProject {
-                        #   displayname = "FStar";
+                        #   displayname = "F*";
                         #   description = "The F* proof-oriented language";
                         #   owner = "fstarlang";
                         #   repo = "fstar";
                         # };
-                        # krml = mkGhProject {
-                        #   displayname = "KaRaMeL";
-                        #   description = "Extract F* programs to readable C code";
-                        #   owner = "fstarlang";
-                        #   repo = "karamel";
-                        # };
+                        krml = mkGhProject {
+                          displayname = "KarameL";
+                          description = "Extract F* programs to readable C code";
+                          owner = "fstarlang";
+                          repo = "karamel";
+                        };
                         hacl-star = mkGhProject {
-                          displayname = "hacl-star";
+                          displayname = "Hacl*";
                           description = "A formally verified library of modern cryptographic algorithms";
                           owner = "project-everest";
                           repo = "hacl-star";
+                        };
+                        everest = mkGhProject {
+                          displayname = "Everest";
+                          description = "Efficient, verified components for the HTTPS ecosystem";
+                          owner = "project-everest";
+                          repo = "everest-nix";
                         };
                       };
               };

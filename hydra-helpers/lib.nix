@@ -10,7 +10,7 @@ rec {
     hidden = false;
     # If [checkinterval ≠ 0], then job is evaluated a first time at [t=0]!
     # Here, we basically disable [checkinterval], but still, with jobs being evaluated on creation
-    checkinterval = 3600;
+    checkinterval = 120;
     schedulingshares = priority;
     enableemail = false;
     emailoverride = "";

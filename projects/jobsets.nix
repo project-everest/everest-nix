@@ -9,7 +9,6 @@ with hydra-helpers.lib.${system};
 
 {
   jobsets = pkgs.writeText "spec.json" (builtins.toJSON {
-    name = "branch-master";
-    value = makeJob 1000 "Branch master" "github:project-everest/everest-nix?dir=projects";
+    master = makeJob 1000 "everest master" "github:project-everest/everest-nix?dir=projects";
   });
 }

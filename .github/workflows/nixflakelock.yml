@@ -1,0 +1,36 @@
+name: update lock files
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install nix
+        uses: cachix/install-nix-action@v15
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: update projects/flake.lock
+        run: |
+          cd projects
+          nix flake update
+          cd ..
+      - name: update server-configuration/flake.lock
+        run: |
+          cd server-configuration
+          nix flake update
+          cd ..
+      - name: update hydra-helpers/flake.lock
+        run: |
+          cd hydra-helpers
+          nix flake update
+          cd ..
+      - name: commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Project Everest
+          author_email: project@everest
+          message: "update lock files"

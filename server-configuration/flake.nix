@@ -205,8 +205,9 @@
                                 "everest-nix": {
                                   "type": "git",
                                   "value": "https://github.com/project-everest/everest-nix.git master"
-                                },
+                                }
                               }
+                            }
                           ''}";
                         };
                       };

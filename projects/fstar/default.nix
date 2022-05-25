@@ -6,7 +6,7 @@ let
   inherit
     (import ./fstar-factory.nix {inherit stdenv lib makeWrapper which z3 ocamlPackages sd;})
     binary-of-fstar check-fstar;
-  name = src.name or src.shortRev;
+  name = "fstar-${src.shortRev}";
   bin = binary-of-fstar { inherit src name; };
 in bin // {
   passthru = {

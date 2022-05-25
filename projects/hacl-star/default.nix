@@ -58,6 +58,8 @@ stdenv.mkDerivation {
   #  rm -rf dist/*/{Makefile.basic,package.json}
   #'';
 
+  buildTargets = [ "ci" ];
+
   installPhase = ''
     cp -r ./. $out
   '';

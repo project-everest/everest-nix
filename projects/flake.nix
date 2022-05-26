@@ -26,7 +26,7 @@
        let pkgs = nixpkgs.legacyPackages.${system}.appendOverlays (builtins.attrValues overlays);
            inherit (pkgs.lib) mapAttrs mapAttrs' mapAttrsToList nameValuePair filterAttrs foldAttrs;
        in rec {
-         packages = { inherit (pkgs) fstar karamel hacl mlcrypto; };
+         packages = { inherit (pkgs) z3 fstar karamel hacl mlcrypto; };
          checks = filterAttrs (_: v: !(isNull v)) (mapAttrs (k: p: (p.passthru or {}).tests or null) packages);
          hydraJobs = foldAttrs (v: _: v) null (mapAttrsToList (k: v: {
            ${k} = v;

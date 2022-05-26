@@ -31,6 +31,20 @@
          hydraJobs = foldAttrs (v: _: v) null (mapAttrsToList (k: v: {
            ${k} = v;
          } // mapAttrs' (k': v: nameValuePair "${k}-${k'}" v) (v.passthru or {})) packages) // {
+           hacl-build-products = pkgs.stdenv.mkDerivation {
+             name = "hacl-build-products";
+             phases = [ "installPhase" ];
+             installPhase = ''
+               mkdir -p $out
+               cd $hacl
+               tar -cf $out/hints.tar hints
+               tar -cf $out/dist.tar dist
+
+               mkdir -p $out/nix-support
+               echo "file hints $out/hints.tar" >> $out/nix-support/hydra-build-products
+               echo "file dist $out/dist.tar" >> $out/nix-support/hydra-build-products
+             '';
+           };
            dependencies = pkgs.stdenv.mkDerivation {
              name = "dependencies";
              phases = ["installPhase"];

@@ -107,11 +107,11 @@
                     useShortContext = 1
                   </githubstatus>
                   <githubstatus>
-                    jobs = hacl-star:.*
+                    jobs = hacl-star:.*:hacl.*
                     excludeBuildFromContext = 1
                     overrideOwner = project-everest
                     overrideRepo = hacl-star
-                    useShortContext = 1
+                    context = Everest Hydra
                   </githubstatus>
                   Include ${config.age.secrets.github-token-hydra.path}
                 '';

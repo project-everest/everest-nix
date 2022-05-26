@@ -36,7 +36,7 @@
              phases = [ "installPhase" ];
              installPhase = ''
                mkdir -p $out
-               cd $hacl
+               cd ${pkgs.hacl}
                tar -cf $out/hints.tar hints
                tar -cf $out/dist.tar dist
 

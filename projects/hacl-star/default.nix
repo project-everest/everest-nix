@@ -10,6 +10,7 @@
 , stdenv
 , which
 , src
+, time
 }:
 
 stdenv.mkDerivation {
@@ -20,6 +21,8 @@ stdenv.mkDerivation {
   postPatch = ''
     patchShebangs tools
     patchShebangs dist/configure
+    substituteInPlace Makefile --replace "/usr/bin/time" "${time}/bin/time"
+    substituteInPlace Makefile --replace "NOSHORTLOG=1" ""
   '';
 
   nativeBuildInputs = [
@@ -45,8 +48,6 @@ stdenv.mkDerivation {
   VALE_HOME     = vale;
   FSTAR_HOME    = fstar;
   KRML_HOME     = karamel;
-
-  NOSHORTLOG = "1";
 
   configurePhase = ''
     export HACL_HOME=$(pwd)

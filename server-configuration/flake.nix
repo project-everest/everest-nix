@@ -44,6 +44,7 @@
                   keys.everest-ci-nginx
                 ];
               };
+              environment.systemPackages = with pkgs; [ vim tmux htop ];
               age.ageBin = "${pkgs.age}/bin/age"; # See https://github.com/ryantm/agenix/pull/81
               age.secrets.github-token-nix-conf = {
                 file = ./secrets/github-token-nix-conf.age;

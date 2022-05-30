@@ -1,7 +1,7 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-21.11";
+    nixpkgs.url = "nixpkgs/nixos-21.11";
     hydra.url = "github:NixOS/hydra";
     agenix = {
       url = "github:ryantm/agenix";

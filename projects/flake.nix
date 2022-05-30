@@ -7,7 +7,7 @@
     hacl-src     = {url = "github:project-everest/hacl-star"; flake = false;};
     
     flake-utils.url = "flake-utils";
-    nixpkgs.url = "nixpkgs";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 
   outputs = {

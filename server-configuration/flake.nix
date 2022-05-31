@@ -184,7 +184,7 @@
                           owner = "project-everest";
                           repo = "hacl-star";
                         };
-                        everest = {
+                        everest-nix = {
                           displayname = "Everest";
                           description = "Efficient, verified components for the HTTPS ecosystem";
                           enabled = 1;

@@ -92,6 +92,8 @@ let
         [ -z "$compileCompLib"  ] || { instLib fstar-compiler-lib; }
       '';
 
+      dontFixup = true;
+
       meta.mainProgram = "fstar.exe";
     });
   # Helper derivation that prepares an F* source tree with an existing F* binary/
@@ -114,6 +116,7 @@ let
       done
       cd ..
     '';
+    dontFixup = true;
   };
   mlSnapshot-of-fstar = opts: (with-existing-fstar opts).overrideAttrs (o: {
     buildPhase = ''make -j$NIX_BUILD_CORES ocaml -C src'';

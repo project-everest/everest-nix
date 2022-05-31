@@ -64,4 +64,6 @@ stdenv.mkDerivation {
   installPhase = ''
     cp -r ./. $out
   '';
+
+  dontFixup = true;
 }

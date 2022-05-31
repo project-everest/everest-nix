@@ -30,6 +30,7 @@ stdenv.mkDerivation {
     python3
     which
     mono
+    time
   ] ++ (with ocamlPackages; [
     ocaml
     findlib

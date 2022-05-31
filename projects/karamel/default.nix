@@ -29,7 +29,7 @@ stdenv.mkDerivation {
     pprint
     menhir
     menhirLib
-    sedlex_2
+    sedlex
     process
     fix
     wasm

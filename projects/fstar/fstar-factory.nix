@@ -40,7 +40,7 @@ let
   ocamlNativeBuildInputs = with ocamlPackages; [ ocaml ocamlbuild findlib menhir ];
   ocamlBuildInputs = with ocamlPackages; [
     batteries zarith stdint yojson fileutils
-    menhirLib pprint sedlex_2 ppxlib
+    menhirLib pprint sedlex ppxlib
     ppx_deriving ppx_deriving_yojson process
   ];
   preBuild = {name}:

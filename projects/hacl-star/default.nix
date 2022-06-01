@@ -21,7 +21,7 @@ stdenv.mkDerivation {
   postPatch = ''
     patchShebangs tools
     patchShebangs dist/configure
-    substituteInPlace Makefile --replace "/usr/bin/time" "${time}/bin/time"
+    substituteInPlace Makefile --replace "/usr/bin/time" "`which time`"
     substituteInPlace Makefile --replace "NOSHORTLOG=1" ""
   '';
 

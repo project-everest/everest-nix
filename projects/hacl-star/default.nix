@@ -4,7 +4,7 @@
 , karamel
 , vale
 , enableParallelBuilding ? true
-, mono
+, dotnet-runtime
 , ocamlPackages
 , python3
 , stdenv
@@ -29,7 +29,7 @@ stdenv.mkDerivation {
     z3
     python3
     which
-    mono
+    dotnet-runtime
     time
   ] ++ (with ocamlPackages; [
     ocaml

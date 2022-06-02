@@ -17,8 +17,9 @@
   }: flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
        let pkgs = nixpkgs.legacyPackages.${system};
            inherit (pkgs.lib) mapAttrs mapAttrs' mapAttrsToList nameValuePair filterAttrs foldAttrs;
+           everestPackages = pkgs.callPackage ./everestPackages.nix { inherit fstar-src karamel-src hacl-src; };
        in rec {
-         packages = pkgs.callPackage ./everestPackages.nix { inherit fstar-src karamel-src hacl-src; };
+         packages = { inherit (everestPackages) z3 fstar karamel vale mlcrypto hacl; };
          checks = filterAttrs (_: v: !(isNull v)) (mapAttrs (k: p: (p.passthru or {}).tests or null) packages);
          hydraJobs = foldAttrs (v: _: v) null (mapAttrsToList (k: v: {
            ${k} = v;

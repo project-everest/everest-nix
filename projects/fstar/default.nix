@@ -1,10 +1,10 @@
-{ stdenv, lib, makeWrapper, which, z3, ocamlPackages, sd,
-  sphinx, python39Packages,
-  src
-}@inputs:
+{ stdenv, lib, makeWrapper, which, ocamlPackages, sd, sphinx, python39Packages
+, z3, src }@inputs:
 let
-  inherit
-    (import ./fstar-factory.nix {inherit stdenv lib makeWrapper which z3 ocamlPackages sd;})
+  inherit (import ./fstar-factory.nix {
+    inherit stdenv lib makeWrapper which ocamlPackages sd;
+    z3 = z3;
+  })
     binary-of-fstar check-fstar;
   name = "fstar-${src.shortRev}";
   bin = binary-of-fstar { inherit src name; };

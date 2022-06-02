@@ -5,7 +5,7 @@
     fstar-src    = {url = "github:fstarlang/fstar";           flake = false;};
     karamel-src  = {url = "github:fstarlang/karamel";         flake = false;};
     hacl-src     = {url = "github:project-everest/hacl-star"; flake = false;};
-    
+
     flake-utils.url = "flake-utils";
     nixpkgs.url = "nixpkgs/nixos-unstable";
   };
@@ -14,19 +14,11 @@
     fstar-src, karamel-src, hacl-src,
       flake-utils, nixpkgs,
       ...
-  }: let overlays = {
-           ocamlPackages = (final: prev: {
-             ocamlPackages = prev.ocaml-ng.ocamlPackages_4_12;
-           });
-           everest = (import ./overlay.nix {
-             inherit fstar-src karamel-src hacl-src;
-           });
-         };
-     in { inherit overlays; } // flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
-       let pkgs = nixpkgs.legacyPackages.${system}.appendOverlays (builtins.attrValues overlays);
+  }: flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
+       let pkgs = nixpkgs.legacyPackages.${system};
            inherit (pkgs.lib) mapAttrs mapAttrs' mapAttrsToList nameValuePair filterAttrs foldAttrs;
        in rec {
-         packages = { inherit (pkgs) z3 fstar karamel hacl mlcrypto; };
+         packages = pkgs.callPackage ./everestPackages.nix { inherit fstar-src karamel-src hacl-src; };
          checks = filterAttrs (_: v: !(isNull v)) (mapAttrs (k: p: (p.passthru or {}).tests or null) packages);
          hydraJobs = foldAttrs (v: _: v) null (mapAttrsToList (k: v: {
            ${k} = v;
@@ -36,7 +28,7 @@
              phases = [ "installPhase" ];
              installPhase = ''
                mkdir -p $out
-               cd ${pkgs.hacl}
+               cd ${packages.hacl}
                tar -cf $out/hints.tar hints
                tar -cf $out/dist.tar dist
 

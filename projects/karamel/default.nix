@@ -1,24 +1,12 @@
-{ z3
-, fstar
-, doCheck ? false
-, enableParallelBuilding ? true
-, ocamlPackages
-, stdenv
-, symlinks
-, which
-, src
-}:
+{ doCheck ? true, enableParallelBuilding ? true, ocamlPackages, stdenv, symlinks
+, which, z3, fstar, src }:
 
 stdenv.mkDerivation {
   name = "karamel";
 
   inherit src;
 
-  buildInputs = [
-    z3
-    which
-    symlinks
-  ] ++ (with ocamlPackages; [
+  buildInputs = [ z3 which symlinks ] ++ (with ocamlPackages; [
     ocaml
     ocamlbuild
     findlib

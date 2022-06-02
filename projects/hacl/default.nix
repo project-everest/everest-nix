@@ -1,17 +1,5 @@
-{ z3
-, fstar
-, mlcrypto
-, karamel
-, vale
-, enableParallelBuilding ? true
-, dotnet-runtime
-, ocamlPackages
-, python3
-, stdenv
-, which
-, src
-, time
-}:
+{ enableParallelBuilding ? true, dotnet-runtime, ocamlPackages, python3, stdenv
+, which, time, z3, fstar, karamel, vale, mlcrypto, src }:
 
 stdenv.mkDerivation {
   name = "hacl-star";
@@ -25,30 +13,25 @@ stdenv.mkDerivation {
     substituteInPlace Makefile --replace "NOSHORTLOG=1" ""
   '';
 
-  nativeBuildInputs = [
-    z3
-    python3
-    which
-    dotnet-runtime
-    time
-  ] ++ (with ocamlPackages; [
-    ocaml
-    findlib
-    batteries
-    pprint
-    stdint
-    yojson
-    zarith
-    ppxlib
-    ppx_deriving
-    ppx_deriving_yojson
-    ctypes
-  ]);
+  nativeBuildInputs = [ z3 python3 which dotnet-runtime time ]
+    ++ (with ocamlPackages; [
+      ocaml
+      findlib
+      batteries
+      pprint
+      stdint
+      yojson
+      zarith
+      ppxlib
+      ppx_deriving
+      ppx_deriving_yojson
+      ctypes
+    ]);
 
   MLCRYPTO_HOME = mlcrypto;
-  VALE_HOME     = vale;
-  FSTAR_HOME    = fstar;
-  KRML_HOME     = karamel;
+  VALE_HOME = vale;
+  FSTAR_HOME = fstar;
+  KRML_HOME = karamel;
 
   configurePhase = ''
     export HACL_HOME=$(pwd)

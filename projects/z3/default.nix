@@ -1,6 +1,4 @@
-{ fetchFromGitHub
-, z3
-}:
+{ fetchFromGitHub, z3 }:
 
 z3.overrideAttrs (old: rec {
   version = "4.8.5";

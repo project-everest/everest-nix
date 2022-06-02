@@ -1,9 +1,4 @@
-{ ocamlPackages
-, openssl
-, perl
-, stdenv
-, fetchFromGitHub
-}:
+{ ocamlPackages, openssl, perl, stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation {
   name = "mlcrypto";
@@ -16,13 +11,7 @@ stdenv.mkDerivation {
     sha256 = "JS01iYdNHltszxr/bxbX0qE+L9iwBDdTbn3aH2ji9I0=";
   };
 
-  buildInputs = [
-    openssl.dev
-    perl
-  ] ++ (with ocamlPackages; [
-    ocaml
-    findlib
-  ]);
+  buildInputs = [ openssl.dev perl ] ++ (with ocamlPackages; [ ocaml findlib ]);
 
   enableParallelBuilding = true;
 

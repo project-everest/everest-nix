@@ -1,4 +1,4 @@
-{ doCheck ? true, enableParallelBuilding ? true, ocamlPackages, stdenv, symlinks
+{ doCheck ? false, enableParallelBuilding ? true, ocamlPackages, stdenv, symlinks
 , which, z3, fstar, src }:
 
 stdenv.mkDerivation {

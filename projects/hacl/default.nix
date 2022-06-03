@@ -39,9 +39,10 @@ stdenv.mkDerivation {
 
   inherit enableParallelBuilding;
 
-  #preBuild = ''
-  #  rm -rf dist/*/{Makefile.basic,package.json}
-  #'';
+  preBuild = ''
+    rm -rf dist/*/*
+    rm -rf hints/*
+  '';
 
   buildTargets = [ "ci" ];
 

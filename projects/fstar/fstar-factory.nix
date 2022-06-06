@@ -119,7 +119,7 @@ let
     dontFixup = true;
   };
   mlSnapshot-of-fstar = opts: (with-existing-fstar opts).overrideAttrs (o: {
-    buildPhase = ''make -j$NIX_BUILD_CORES ocaml -C src'';
+    buildFlags = [ "ocaml" "-C" "src" ];
     installPhase = ''cp -r . $out'';
   });
   /* F* tests are twofold:

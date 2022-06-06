@@ -184,32 +184,11 @@
                           owner = "project-everest";
                           repo = "hacl-star";
                         };
-                        everest-nix = {
+                        everest-nix = mkGhProject {
                           displayname = "Everest";
                           description = "Efficient, verified components for the HTTPS ecosystem";
-                          enabled = 1;
-                          visible = true;
-                          declarative.file = "spec.json";
-                          declarative.type = "path";
-                          declarative.value = "${pkgs.writeTextDir "spec.json" ''
-                            { "enabled": 1,
-                              "hidden": false,
-                              "description": "Everest Jobsets",
-                              "nixexprinput": "everest-nix",
-                              "nixexprpath": "projects/jobsets.nix",
-                              "checkinterval": 3600,
-                              "schedulingshares": 100,
-                              "enableemail": true, 
-                              "emailoverride": "",
-                              "keepnr": 3,
-                              "inputs": {
-                                "everest-nix": {
-                                  "type": "git",
-                                  "value": "https://github.com/project-everest/everest-nix.git master"
-                                }
-                              }
-                            }
-                          ''}";
+                          owner = "project-everest";
+                          repo = "everest-nix";
                         };
                       };
               };

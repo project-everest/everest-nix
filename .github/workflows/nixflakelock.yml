@@ -28,9 +28,9 @@ jobs:
           cd hydra-helpers
           nix flake update
           cd ..
-      - name: commit changes
-        uses: EndBug/add-and-commit@v9
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v4
         with:
-          author_name: Project Everest
-          author_email: project@everest
-          message: "update lock files"
+          commit-message: '[CI] update flake lockfiles'
+          title: Update flake lockfiles
+          branch: update-flake-lock

@@ -54,28 +54,20 @@ let
     dontFixup = true;
 
     passthru = {
-      dist = stdenv.mkDerivation {
-        name = "hacl-dist";
-        phases = [ "installPhase" ];
-        installPhase = ''
-          mkdir -p $out
-          cd ${hacl}
-          tar -cvf $out/dist.tar dist/*/*
-
-          mkdir -p $out/nix-support
-          echo "file dist $out/dist.tar" >> $out/nix-support/hydra-build-products
-        '';
-      };
-      hints = stdenv.mkDerivation {
-        name = "hacl-hints";
+      build-products = stdenv.mkDerivation {
+        name = "hacl-build-products";
         phases = [ "installPhase" ];
         installPhase = ''
           mkdir -p $out
           cd ${hacl}
           tar -cvf $out/hints.tar hints/
+          tar -cvf $out/dist.tar dist/*/*
+          echo ${src.rev} > $out/rev.txt
 
           mkdir -p $out/nix-support
           echo "file hints $out/hints.tar" >> $out/nix-support/hydra-build-products
+          echo "file dist $out/dist.tar" >> $out/nix-support/hydra-build-products
+          echo "file rev $out/rev.txt" >> $out/nix-support/hydra-build-products
         '';
       };
     };

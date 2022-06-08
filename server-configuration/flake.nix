@@ -114,6 +114,13 @@
                     overrideRepo = hacl-star
                     context = Everest Hydra
                   </githubstatus>
+                  <githubstatus>
+                    jobs = everest:.*:hacl.*
+                    excludeBuildFromContext = 1
+                    overrideOwner = project-everest
+                    overrideRepo = everest-nix
+                    context = Everest Hydra
+                  </githubstatus>
                   Include ${config.age.secrets.github-token-hydra.path}
                 '';
               };

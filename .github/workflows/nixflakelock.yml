@@ -32,5 +32,6 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: '[CI] update flake lockfiles'
+          committer: 'Everest Bot <everest-bot@protonmail.com>'
           title: Update flake lockfiles
           branch: update-flake-lock

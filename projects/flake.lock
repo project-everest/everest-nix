@@ -17,11 +17,11 @@
     "fstar-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1654728415,
-        "narHash": "sha256-UOxniM8lPda+EgIC6kvywArNxy0A5c+KGR7fr9lJVms=",
+        "lastModified": 1654738497,
+        "narHash": "sha256-JIXgb4o7Y1QaQXcQHx2+3piyv46HXfOi3cVf+7V0tac=",
         "owner": "fstarlang",
         "repo": "fstar",
-        "rev": "df0c1bee44543026db3558757bb195fd5cbcd6da",
+        "rev": "061f57e546f92f78de27a51d5b3fae9463585b7d",
         "type": "github"
       },
       "original": {
@@ -64,17 +64,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1654593855,
-        "narHash": "sha256-c+SyXvj7THre87OyIdZfRVR+HhI/g1ZDrQ3VUtTuHkU=",
-        "owner": "NixOS",
+        "lastModified": 1654763942,
+        "narHash": "sha256-+wieQ2gmW2xCP0tRse8gjTLWMzzlvJ/XL/KoK2zxW+g=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "033bd4fa9a8fbe0c68a88e925d9a884161044b25",
+        "rev": "d2f72cbfe0aa7d4d7960d8f2c587959031779c19",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {

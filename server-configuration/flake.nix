@@ -179,12 +179,12 @@
                         #   owner = "fstarlang";
                         #   repo = "fstar";
                         # };
-                        krml = mkGhProject {
-                          displayname = "KarameL";
-                          description = "Extract F* programs to readable C code";
-                          owner = "fstarlang";
-                          repo = "karamel";
-                        };
+                        #karamel = mkGhProject {
+                        #  displayname = "Karamel";
+                        #  description = "Extract F* programs to readable C code";
+                        #  owner = "fstarlang";
+                        #  repo = "karamel";
+                        #};
                         hacl-star = mkGhProject {
                           displayname = "Hacl*";
                           description = "A formally verified library of modern cryptographic algorithms";

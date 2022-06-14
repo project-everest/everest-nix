@@ -15,11 +15,12 @@ jobs:
           fetch-depth: 0
       - name: check build status
         run: |
+          git checkout --progress --force -B update-flake-lock refs/remotes/origin/update-flake-lock
           STATUS_SUCCEEDED=0 # from https://github.com/NixOS/hydra/blob/cf9f38e43fd81f9298e3f2ff50c8a6ee0acc3af0/hydra-api.yaml#L927-L941
           baseUrl="https://everest-ci.paris.inria.fr"
           latestFinishedEval=$(curl -sLH 'Content-Type: application/json' "$baseUrl/jobset/everest/branch-update-flake-lock/latest-eval")
-          rev=$(echo "$latestFinishedEval" | jq '.flake | split("/") | last')
-          id=$(echo "$latestFinishedEval" | jq '.id')
+          rev=$(echo "$latestFinishedEval" | jq -r '.flake | split("/") | last')
+          id=$(echo "$latestFinishedEval" | jq -r '.id')
           [[ "$rev" == "$(git rev-parse update-flake-lock)" ]] || {
               echo "The latest evaluation on the CI doesn't correspond to the latest commit."
               exit 1
@@ -27,7 +28,7 @@ jobs:
           buildUrl="$baseUrl/eval/$id/job/hacl.x86_64-linux"
           buildInfo=$(curl -sLH 'Content-Type: application/json' "$buildUrl")
           # Check wether the build was built correctly
-          [[ "$(echo "$buildInfo" | jq '.buildstatus')" == "$STATUS_SUCCEEDED" ]] || {
+          [[ "$(echo "$buildInfo" | jq -r '.buildstatus')" == "$STATUS_SUCCEEDED" ]] || {
               echo "The latest evaluation wasn't successful."
               exit 2
           }

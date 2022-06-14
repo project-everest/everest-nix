@@ -37,6 +37,7 @@
                fstar   = fstar-src.rev;
                karamel = karamel-src.rev;
                hacl    = hacl-src.rev;
+               nixpkgs = nixpkgs.rev;
              };
            };
          };

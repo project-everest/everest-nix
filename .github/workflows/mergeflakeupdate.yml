@@ -1,0 +1,43 @@
+name: merge lock files
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  merge-flake-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: check build status
+        run: |
+          STATUS_SUCCEEDED=0 # from https://github.com/NixOS/hydra/blob/cf9f38e43fd81f9298e3f2ff50c8a6ee0acc3af0/hydra-api.yaml#L927-L941
+          baseUrl="https://everest-ci.paris.inria.fr"
+          latestFinishedEval=$(curl -sLH 'Content-Type: application/json' "$baseUrl/jobset/everest/branch-update-flake-lock/latest-eval")
+          rev=$(echo "$latestFinishedEval" | jq '.flake | split("/") | last')
+          id=$(echo "$latestFinishedEval" | jq '.id')
+          [[ "$rev" == "$(git rev-parse update-flake-lock)" ]] || {
+              echo "The latest evaluation on the CI doesn't correspond to the latest commit."
+              exit 1
+          }
+          buildUrl="$baseUrl/eval/$id/job/hacl.x86_64-linux"
+          buildInfo=$(curl -sLH 'Content-Type: application/json' "$buildUrl")
+          # Check wether the build was built correctly
+          [[ "$(echo "$buildInfo" | jq '.buildstatus')" == "$STATUS_SUCCEEDED" ]] || {
+              echo "The latest evaluation wasn't successful."
+              exit 2
+          }
+      - name: merge branch update-flake-lock
+        run: |
+          git config --local user.email "project-everest@protonmail.com"
+          git config --local user.name "Everest Bot"
+          git merge update-flake-lock
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main

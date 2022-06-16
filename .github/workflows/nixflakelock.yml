@@ -28,10 +28,16 @@ jobs:
           cd hydra-helpers
           nix flake update
           cd ..
-      - name: create pull request
-        uses: peter-evans/create-pull-request@v4
+      - name: commit changes
+        run: |
+          git config --local user.name "Everest Bot"
+          git config --local user.email "everest-bot@protonmail.com"
+          git add projects/flake.lock
+          git add server-configuration/flake.lock
+          git add hydra-helpers/flake.lock
+          git commit -m "[CI] update flake lockfiles"
+      - name: push
+        uses: ad-m/github-push-action@master
         with:
-          commit-message: '[CI] update flake lockfiles'
-          committer: 'Everest Bot <everest-bot@protonmail.com>'
-          title: Update flake lockfiles
           branch: update-flake-lock
+          force: true

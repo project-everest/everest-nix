@@ -121,6 +121,12 @@
                     overrideRepo = everest-nix
                     context = Everest Hydra
                   </githubstatus>
+                  <githubstatus>
+                    jobs = comparse:.*:comparse-tests.x86_64-linux
+                  </githubstatus>
+                  <githubstatus>
+                    jobs = mls-star:.*:mls-tests.x86_64-linux
+                  </githubstatus>
                   Include ${config.age.secrets.github-token-hydra.path}
                 '';
               };

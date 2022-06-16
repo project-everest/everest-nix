@@ -17,11 +17,11 @@
     "fstar-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1654738497,
-        "narHash": "sha256-JIXgb4o7Y1QaQXcQHx2+3piyv46HXfOi3cVf+7V0tac=",
+        "lastModified": 1655306725,
+        "narHash": "sha256-+OWZiK9nBy+LyaiJW5IedOPM7fiHDG6krVYaKX/0CGo=",
         "owner": "fstarlang",
         "repo": "fstar",
-        "rev": "061f57e546f92f78de27a51d5b3fae9463585b7d",
+        "rev": "13b51b6b009e92c4d4d32a92645f484e54574e62",
         "type": "github"
       },
       "original": {
@@ -33,11 +33,11 @@
     "hacl-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1654819601,
-        "narHash": "sha256-hEbW74UiBr3UoRjBk8+FUtTMvjMUgS4ZNZJ7JuJHah4=",
+        "lastModified": 1655303777,
+        "narHash": "sha256-S1Q5g0A7bRBKSznqgfve9IqeCucvQdajjcBiT0G3/zU=",
         "owner": "project-everest",
         "repo": "hacl-star",
-        "rev": "5114dd553405bf04fd258a18d5f7b51934d2eab7",
+        "rev": "9aacc8cdbddcca59f3f7b2869eb12a4dd59a0d04",
         "type": "github"
       },
       "original": {
@@ -64,11 +64,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1654819923,
-        "narHash": "sha256-s3m3dbCVWw7XAFbkIJyPKtlqgbcDD+2BrBOGTRn0fIw=",
+        "lastModified": 1655342614,
+        "narHash": "sha256-HgoYKVCymGCupRgXwL1TC2SeFJnztOpfq9l4IQtf0kM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a58de450c514aa1bc5a4999f92656ab6b600dc59",
+        "rev": "14f4a4a6853813a80c70c4c508f05bde58310241",
         "type": "github"
       },
       "original": {

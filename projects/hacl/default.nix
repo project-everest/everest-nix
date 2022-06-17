@@ -13,6 +13,7 @@ let
       patchShebangs dist/configure
       substituteInPlace Makefile --replace "/usr/bin/time" "`which time`"
       substituteInPlace Makefile --replace "NOSHORTLOG=1" ""
+      echo "0.3.19" > vale/.vale_version
     '';
 
     nativeBuildInputs = [ z3 fstar python3 which dotnet-runtime time ]

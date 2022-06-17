@@ -43,21 +43,24 @@ let
     menhirLib pprint sedlex ppxlib
     ppx_deriving ppx_deriving_yojson process
   ];
-  preBuild = {name}:
+  preBuild = {name,rev}:
   ''echo "echo ${lib.escapeShellArg name}" > src/tools/get_commit
-    patchShebangs src/tools ulib/gen_mllib.sh bin'';
+    patchShebangs src/tools ulib/gen_mllib.sh bin
+    substituteInPlace src/ocaml-output/Makefile --replace '$(COMMIT)' '${rev}'
+  '';
   /* Default options */
   defaults = { keepSources     = false; compileFStar = true ;
                compileBytecode = false; compileTests = true ;
                compileCompLib  = true ; compileULib  = true ; };
   binary-of-mlSnapshot =
-    { src, name, opts ? {} }: stdenv.mkDerivation (defaults // opts // {
+    { src, name, rev, opts ? {} }: stdenv.mkDerivation (defaults // opts // {
       inherit src name;
+
       nativeBuildInputs = [ makeWrapper z3 ] ++ ocamlNativeBuildInputs;
       buildInputs = ocamlBuildInputs;
 
       preBuildPhases = ["preparePhase"];
-      preparePhase = preBuild {inherit name;};
+      preparePhase = preBuild {inherit name; inherit rev;};
 
       # Triggers [make] rules according to [opts] contents
       buildPhase = ''
@@ -98,13 +101,13 @@ let
     });
   # Helper derivation that prepares an F* source tree with an existing F* binary/
   with-existing-fstar = {
-    src, name, existing-fstar, patches ? [],
+    src, name, rev, existing-fstar, patches ? [],
   }: stdenv.mkDerivation {
     inherit name src patches;
     EX_FSTAR = existing-fstar;
     nativeBuildInputs = [z3 which existing-fstar];
     preBuildPhases = ["preparePhase" "copyBinPhase"];
-    preparePhase = preBuild {inherit name;};
+    preparePhase = preBuild {inherit name rev;};
     copyBinPhase = ''
       cd bin
       # Next line is required when building F* before commit [6dbcdc1bce]
@@ -139,10 +142,11 @@ let
     buildInputs = ocamlBuildInputs;
   });
   binary-of-fstar =
-    { src, name
+    { src, name, rev
     , patches ? []
     , existing-fstar ? binary-of-mlSnapshot { inherit src;
                                               name = "${name}-bootstrap";
+                                              inherit rev;
                                               opts = {
                                                 compileULib    = false;
                                                 compileCompLib = false;
@@ -151,10 +155,11 @@ let
     , opts ? defaults
     }:
     binary-of-mlSnapshot {
-      inherit name opts;
+      inherit name rev opts;
       src = mlSnapshot-of-fstar {
         inherit src existing-fstar patches;
         name = "${name}-mlSnapshot";
+        inherit rev;
       };
     };
 in { inherit binary-of-fstar mlSnapshot-of-fstar binary-of-mlSnapshot check-fstar

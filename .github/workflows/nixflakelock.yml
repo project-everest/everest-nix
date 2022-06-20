@@ -31,7 +31,7 @@ jobs:
       - name: commit changes
         run: |
           git config --local user.name "Everest Bot"
-          git config --local user.email "everest-bot@protonmail.com"
+          git config --local user.email "project-everest@protonmail.com"
           git add projects/flake.lock
           git add server-configuration/flake.lock
           git add hydra-helpers/flake.lock

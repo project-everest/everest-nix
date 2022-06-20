@@ -15,7 +15,7 @@ let
       substituteInPlace Makefile --replace "NOSHORTLOG=1" ""
     '';
 
-    nativeBuildInputs = [ z3 python3 which dotnet-runtime time ]
+    nativeBuildInputs = [ z3 fstar python3 which dotnet-runtime time ]
       ++ (with ocamlPackages; [
         ocaml
         findlib

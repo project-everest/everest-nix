@@ -25,6 +25,17 @@
          hydraJobs = foldAttrs (v: _: v) null (mapAttrsToList (k: v: {
            ${k} = v;
          } // mapAttrs' (k': v: nameValuePair "${k}-${k'}" v) (v.passthru or {})) packages) // {
+           foobar = pkgs.stdenv.mkDerivation {
+             name = "foobar";
+             phases = [ "installPhase" ];
+             installPhase = ''
+               mkdir -p $out
+               echo "test 1" > $out/test
+
+               mkdir -p $out/nix-support
+               echo "doc report $out/test" >> $out/nix-support/hydra-build-products
+             '';
+           };
            dependencies = pkgs.stdenv.mkDerivation {
              name = "dependencies";
              phases = ["installPhase"];

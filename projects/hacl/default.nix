@@ -45,6 +45,8 @@ let
       rm -rf dist/*/*
     '';
 
+    buildFlags = [ "-k" ];
+
     buildTargets = [ "ci" ];
 
     installPhase = ''

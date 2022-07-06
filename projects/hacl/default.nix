@@ -62,7 +62,16 @@ let
         phases = [ "installPhase" ];
         installPhase = ''
           mkdir -p $out
-          cd ${hacl}
+          cp -r ${hacl}/hints .
+          chmod -R +w hints
+          cp -r ${hacl}/dist .
+          chmod -R +w dist
+
+          for target in c89-compatible election-guard gcc-compatible gcc64-only mitls msvc-compatible portable-gcc-compatible
+          do
+            sed -i 's/\#\!.*/\#\!\/usr\/bin\/env bash/' dist/$target/configure
+          done
+
           tar -cvf $out/hints.tar hints/
           tar -cvf $out/dist.tar dist/*/*
           echo ${src.rev} > $out/rev.txt

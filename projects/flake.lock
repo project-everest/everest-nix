@@ -33,11 +33,11 @@
     "hacl-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1657000800,
-        "narHash": "sha256-h3p8mwFq+6l83hn6DY2CkBpNDv59WdkAqJCkecQ2D/8=",
+        "lastModified": 1657087200,
+        "narHash": "sha256-NndPJNDFBKpf7YXqt29zUsUVwOx82LW3C30NU7i+pj4=",
         "owner": "project-everest",
         "repo": "hacl-star",
-        "rev": "03dc351f240438bc6e763eea419182bfcbf43fd5",
+        "rev": "94e84829204e7957270a4a7de39a43646ae5f61b",
         "type": "github"
       },
       "original": {
@@ -64,11 +64,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1656835607,
-        "narHash": "sha256-zONMAG6JSfGyW20AsVWGnlZwNWws6Q/7IT0oDNGc1xY=",
+        "lastModified": 1657020478,
+        "narHash": "sha256-sU5hXEGcOcvz2xoPAuNLBQJLXjwvPpTkoddyXE8gw20=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "18b14a254dca6b68ca0ce2ce885ce2b550065799",
+        "rev": "71a4f0dc3d80ba76f437c888c1c3d59f1df98163",
         "type": "github"
       },
       "original": {

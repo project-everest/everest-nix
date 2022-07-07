@@ -73,7 +73,16 @@ let
           done
 
           tar -cvf $out/hints.tar hints/
-          tar -cvf $out/dist.tar dist/*/*
+          tar -cvf $out/dist.tar \
+            --exclude='*.a' \
+            --exclude='*.cmi' \
+            --exclude='*.cmx' \
+            --exclude='*.cmxa' \
+            --exclude='*.d' \
+            --exclude='*.exe' \
+            --exclude='*.o' \
+            --exclude='*.so' \
+            dist/*/*
           echo ${src.rev} > $out/rev.txt
 
           mkdir -p $out/nix-support

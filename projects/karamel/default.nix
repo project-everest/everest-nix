@@ -2,7 +2,8 @@
 , which, z3, fstar, src }:
 
 stdenv.mkDerivation {
-  name = "karamel";
+  pname = "karamel";
+  version = src.rev;
 
   inherit src;
 

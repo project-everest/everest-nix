@@ -1,5 +1,5 @@
 { enableParallelBuilding ? true, dotnet-runtime, ocamlPackages, python3, stdenv
-, which, time, z3, fstar, karamel, vale, mlcrypto, src }:
+, which, writeTextFile, time, z3, fstar, karamel, vale, mlcrypto, src }:
 
 let
 
@@ -56,7 +56,16 @@ let
 
     dontFixup = true;
 
-    passthru = {
+    passthru = rec {
+      info = writeTextFile {
+        name = "INFO.txt";
+        text = ''
+          This code was generated with the following toolchain.
+          F* version: ${fstar.version}
+          Karamel version: ${karamel.version}
+          Vale version: ${vale.version}
+        '';
+      };
       build-products = stdenv.mkDerivation {
         name = "hacl-build-products";
         phases = [ "installPhase" ];
@@ -70,6 +79,7 @@ let
           for target in c89-compatible election-guard gcc-compatible gcc64-only mitls msvc-compatible portable-gcc-compatible
           do
             sed -i 's/\#\!.*/\#\!\/usr\/bin\/env bash/' dist/$target/configure
+            cp ${info} dist/$target/INFO.txt
           done
 
           tar -cvf $out/hints.tar hints/

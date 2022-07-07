@@ -6,19 +6,19 @@ let
     z3 = z3;
   })
     binary-of-fstar check-fstar;
-  name = "fstar-${src.shortRev}";
+  pname = "fstar";
   rev = src.rev;
-  bin = binary-of-fstar { inherit src name rev; };
+  bin = binary-of-fstar { inherit src pname rev; };
 in bin // {
   passthru = {
     tests = check-fstar {
       inherit src;
-      name = "${name}-checks";
+      pname = "${pname}-checks";
       rev = src.rev;
       existing-fstar = bin;
     };
     doc = stdenv.mkDerivation {
-      name = "${name}-book";
+      name = "${pname}-book";
       src = src + "/doc/book";
       buildInputs = [ sphinx python39Packages.sphinx_rtd_theme ];
       installPhase = ''

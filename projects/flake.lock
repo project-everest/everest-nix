@@ -17,11 +17,11 @@
     "fstar-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1657667163,
-        "narHash": "sha256-tmwPDoYb9zYEOVX6oY5Q99e+baYlqImse6jkWyOZFzc=",
+        "lastModified": 1657733372,
+        "narHash": "sha256-i0OMGHG3wZR6FtYqwT7CZg3BX/P2Qad2EK/0FeY7yCc=",
         "owner": "fstarlang",
         "repo": "fstar",
-        "rev": "b3dfe7793e74bf28d3bc4b8830584ab24fba0e0f",
+        "rev": "d48a41a39001f0d861262e56acc7e9c126d01e19",
         "type": "github"
       },
       "original": {
@@ -64,11 +64,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1657447684,
-        "narHash": "sha256-FCP9AuU1q6PE3vOeM5SFf58f/UKPBAsoSGDUGamNBbo=",
+        "lastModified": 1657533762,
+        "narHash": "sha256-/cxTFSMmpAb8tBp1yVga1fj+i8LB9aAxnMjYFpRMuVs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5f43d8b088d3771274bcfb69d3c7435b1121ac88",
+        "rev": "38860c9e91cb00f4d8cd19c7b4e36c45680c89b5",
         "type": "github"
       },
       "original": {

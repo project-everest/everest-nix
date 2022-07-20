@@ -108,7 +108,7 @@
                     useShortContext = 1
                   </githubstatus>
                   <githubstatus>
-                    jobs = hacl-star:.*:hacl.*
+                    jobs = hacl-star:.*:hacl.x86_64-linux
                     excludeBuildFromContext = 1
                     overrideOwner = project-everest
                     overrideRepo = hacl-star

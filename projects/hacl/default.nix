@@ -42,9 +42,9 @@ let
 
     inherit enableParallelBuilding;
 
-    #preBuild = ''
-    #  rm -rf dist/*/*
-    #'';
+    preBuild = ''
+      rm -rf dist/*/*
+    '';
 
     buildFlags = [ "-k" ];
 

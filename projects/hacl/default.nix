@@ -79,6 +79,10 @@ let
           for target in c89-compatible election-guard gcc-compatible gcc64-only mitls msvc-compatible portable-gcc-compatible
           do
             sed -i 's/\#\!.*/\#\!\/usr\/bin\/env bash/' dist/$target/configure
+          done
+
+          for target in c89-compatible election-guard gcc-compatible gcc64-only merkle-tree mitls mozilla msvc-compatible portable-gcc-compatible wasm
+          do
             cp ${info} dist/$target/INFO.txt
           done
 

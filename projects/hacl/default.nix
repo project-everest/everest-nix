@@ -1,5 +1,5 @@
 { enableParallelBuilding ? true, dotnet-runtime, ocamlPackages, python3, stdenv
-, which, writeTextFile, time, z3, fstar, karamel, vale, mlcrypto, src }:
+, which, writeTextFile, time, z3, fstar, karamel, vale, mlcrypto, nodejs, nodePackages, src }:
 
 let
 
@@ -7,6 +7,8 @@ let
     name = "hacl-star";
 
     inherit src;
+
+    patches = [ ./Makefile.patch ];
 
     postPatch = ''
       patchShebangs tools
@@ -16,7 +18,7 @@ let
       echo "0.3.19" > vale/.vale_version
     '';
 
-    nativeBuildInputs = [ z3 fstar python3 which dotnet-runtime time ]
+    nativeBuildInputs = [ z3 fstar python3 which dotnet-runtime time nodejs nodePackages.jsdoc ]
       ++ (with ocamlPackages; [
         ocaml
         findlib
@@ -46,9 +48,7 @@ let
       rm -rf dist/*/*
     '';
 
-    buildFlags = [ "-k" ];
-
-    buildTargets = [ "ci" ];
+    buildFlags = [ "-k" "ci" ];
 
     installPhase = ''
       cp -r ./. $out

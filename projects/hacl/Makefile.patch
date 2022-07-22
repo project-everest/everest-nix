@@ -1,0 +1,24 @@
+diff --git a/Makefile b/Makefile
+index adb3d4528b..df73965594 100644
+--- a/Makefile
++++ b/Makefile
+@@ -135,7 +135,7 @@ endif
+ 	cp $< $@
+ 
+ test: test-staged
+-test-unstaged: test-handwritten test-c test-ml test-hpke vale_testInline test-wasm test-bindings-ocaml
++test-unstaged: test-handwritten test-c test-ml test-hpke vale_testInline test-wasm #test-bindings-ocaml
+ 
+ # Any file in code/tests is taken to contain an `int main()` function.
+ # Test should be renamed into Test.EverCrypt
+@@ -158,8 +158,8 @@ mozilla-ci-unstaged: compile-mozilla test-c
+ # Not reusing the -staged automatic target so as to export NOSHORTLOG
+ ci:
+ 	NOSHORTLOG=1 $(MAKE) vale-fst
+-	FSTAR_DEPEND_FLAGS="--warn_error +285" NOSHORTLOG=1 $(MAKE) all-unstaged test-unstaged doc-wasm doc-ocaml
+-	$(MAKE) -C providers/quic_provider # needs a checkout of miTLS, only valid on CI
++	FSTAR_DEPEND_FLAGS="--warn_error +285" NOSHORTLOG=1 $(MAKE) all-unstaged test-unstaged doc-wasm #doc-ocaml
++	#$(MAKE) -C providers/quic_provider # needs a checkout of miTLS, only valid on CI
+ 	./tools/sloccount.sh
+ 
+ # Not reusing the -staged automatic target so as to export MIN_TEST

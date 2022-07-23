@@ -33,11 +33,11 @@
     "hacl-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1658296800,
-        "narHash": "sha256-rmQn9MyqAU1mGgneYCPwyQvgQNuCqbEbYEU+TPX1t+U=",
+        "lastModified": 1658383200,
+        "narHash": "sha256-itiGUPRq7udLo0LhSCaGBUbad/savzJg3WR7RnLSd8k=",
         "owner": "project-everest",
         "repo": "hacl-star",
-        "rev": "de518465c481a0605eabc3197064092a9cbef47a",
+        "rev": "730559884fc8ce6900ea5e87eb8a14e5c60e8869",
         "type": "github"
       },
       "original": {

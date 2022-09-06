@@ -1,5 +1,5 @@
 {
-  description = "Everest Project";
+  description = "Project Everest";
 
   inputs = {
     fstar-src    = {url = "github:fstarlang/fstar";           flake = false;};

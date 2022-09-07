@@ -18,7 +18,6 @@ jobs:
           cd projects
           nix flake lock --update-input fstar-src --update-input karamel-src --update-input hacl-src
           [[ $(git diff flake.lock) != "" ]] || exit 0
-          nix flake lock --update-input nixpkgs --update-input flake-utils
           git config --local user.name "Everest Bot"
           git config --local user.email "project-everest@protonmail.com"
           git add flake.lock

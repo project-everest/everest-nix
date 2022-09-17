@@ -76,12 +76,12 @@ let
           cp -r ${hacl}/dist .
           chmod -R +w dist
 
-          for target in c89-compatible election-guard gcc-compatible gcc64-only mitls msvc-compatible portable-gcc-compatible
+          for target in c89-compatible election-guard gcc-compatible gcc64-only msvc-compatible portable-gcc-compatible
           do
             sed -i 's/\#\!.*/\#\!\/usr\/bin\/env bash/' dist/$target/configure
           done
 
-          for target in c89-compatible election-guard gcc-compatible gcc64-only merkle-tree mitls mozilla msvc-compatible portable-gcc-compatible wasm
+          for target in c89-compatible election-guard gcc-compatible gcc64-only merkle-tree mozilla msvc-compatible portable-gcc-compatible wasm
           do
             cp ${info} dist/$target/INFO.txt
           done
